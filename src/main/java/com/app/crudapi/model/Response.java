@@ -9,6 +9,8 @@ public class Response {
     private String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Paginate paginate;
 
     public Response(int code, String message, Object data) {
         this.code = code;
