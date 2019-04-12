@@ -9,4 +9,14 @@ public class Response {
     private String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
+
+    public Response(int code, String message, Object data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
+    public Response(){
+
+    }
 }

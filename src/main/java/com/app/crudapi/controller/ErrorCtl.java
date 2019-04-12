@@ -2,6 +2,9 @@ package com.app.crudapi.controller;
 
 import com.app.crudapi.model.ErrorMap;
 import com.app.crudapi.model.Response;
+import com.app.crudapi.model.error.Errors;
+import com.app.crudapi.utility.Utility;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
@@ -12,6 +15,8 @@ import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 
@@ -35,7 +40,18 @@ public class ErrorCtl implements ErrorController {
         Response resp = new Response();
         resp.setCode(err.getStatus());
         resp.setMessage(err.getError());
-        resp.setData(err.getErrors());
+        Object map = err.getErrors();
+//        ObjectMapper mapper = new ObjectMapper(); // jackson's objectmapper
+//        String error = "";
+//        Errors[] errors = null;
+//        try {
+//            error = mapper.writeValueAsString(map);
+//            errors = mapper.readValue(error, Errors[].class);
+//        } catch (Exception e){
+//            e.getMessage();
+//        }
+        Errors[] errors = Utility.mapErrors(map);
+        resp.setData(errors);
         return resp;
     }
 

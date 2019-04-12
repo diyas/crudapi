@@ -2,10 +2,14 @@ package com.app.crudapi.model;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Data
 public class InputForm {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Size(message = "Minimal 5 huruf!",min = 5)
     private String fullName;
     @NotEmpty(message = "Harus Di isi!")
